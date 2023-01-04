@@ -7,8 +7,10 @@ on:
   pull_request:
     branches:
     - main
-  run-name: ${{ github.actor }} is learning GitHub Actions
+run-name: ${{ github.actor }} is learning GitHub Actions
 
 
-
-  
+jobs:
+  echo:
+    runs-on: echo "test"
+    
