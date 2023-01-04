@@ -1,19 +1,14 @@
-name: learn-github-actions
+name: echo-on-push
 on:
   workflow_dispatch:
   push:
     branches:
     - main
-  pull_request:
-    branches:
-    - main
-run-name: ${{ github.actor }} is learning GitHub Actions
+run-name: ${{ github.actor }} is pushing a new file
 
 
 jobs:
-  print-username:
+  print_on_push:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Print the input name to STDOUT
-        run: echo "test"
+      - run: echo "test"
