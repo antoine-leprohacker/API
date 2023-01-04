@@ -16,4 +16,4 @@ jobs:
 
     steps:
       - name: Print the input name to STDOUT
-        run: echo test
+        run: echo "test"
