@@ -11,6 +11,9 @@ run-name: ${{ github.actor }} is learning GitHub Actions
 
 
 jobs:
-  echo:
-    runs-on: echo "test"
-    
+  print-username:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print the input name to STDOUT
+        run: echo test
