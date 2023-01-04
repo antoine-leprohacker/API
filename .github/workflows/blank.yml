@@ -28,4 +28,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Setup Python
         uses: actions/setup-python@v4.4.0
+      - name: runPy 
+        run: main.py
        
