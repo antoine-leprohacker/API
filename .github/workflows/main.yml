@@ -1,5 +1,12 @@
+name: learn-github-actions
 on:
   workflow_dispatch:
   push:
     branches:
     - main
+  pull_request:
+run-name: ${{ github.actor }} is learning GitHub Actions
+
+
+
+  
