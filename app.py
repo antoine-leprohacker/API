@@ -1,6 +1,11 @@
 from flask import Flask, request
+import pandas as pd
 app = Flask(__name__)
-transaction = [("Antoine","Christian",1000,10),("Antoine","Christian",200,200)]
+add1 = ("Antoine","Christian",1000,10)
+add1 = ("Antoine","Christian",1000,10,hash(add1))
+add2 = ("Antoine","Christian",200,200)
+add2 = ("Antoine","Christian",200,200,hash(add2))
+transaction = [add1,add2]
 #time is 
 # Function to return all of the dictionary
 @app.route("/display_list", methods=['GET'])
@@ -44,11 +49,32 @@ def addElement():
         person2=str(request.form.get("p2"))
         time=int(request.form.get("time"))
         solde=int(request.form.get("solde"))
-        add = (person1,person2,time,solde)
+        add = (person1,person2,solde)
+        add = (person1,person2,solde,hash(add))
         transaction.append(add)
         return "You have successfully added a new element:" + str(add)
     return "You have"
 
+@app.route("/importeCSV", methods=['GET'])
+def importeCSV():
+    if request.method == 'GET':
+      # CVS Column Names
+      filePath = str(request.form.get("filePath"))
+      print(filePath)
+      col_names = ['first_person','second_person','date', 'value','hash']
+      # Use Pandas to parse the CSV file
+      csvData = pd.read_csv(filePath,names = col_names,engine='python',sep=';')
 
+      # Loop through the Rows
+      for i,row in csvData.iterrows():
+        first_person = row['first_person']
+        second_person = row['second_person']
+        date = row['date']
+        value =  row['value']
+        hash = row['hash']
+        add = (first_person,second_person,date,value,hash)
+       
+        transaction.append(add)
+    return "ok"
 if __name__ =='__main__':
     app.run()
