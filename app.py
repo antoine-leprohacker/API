@@ -55,6 +55,7 @@ def addElement():
         return "You have successfully added a new element:" + str(add)
     return "You have"
 
+# Function to import a CSV file
 @app.route("/importeCSV", methods=['GET'])
 def importeCSV():
     if request.method == 'GET':
@@ -76,5 +77,32 @@ def importeCSV():
        
         transaction.append(add)
     return "ok"
+
+# Hash verification
+@app.route("/hash_vefication")
+def hash_vefication():
+    info = ""
+    for i in transaction:
+        #delete the last parameters of the tuple
+        a = ()
+        for j in range(0,len(i)-2):
+            a += i[j]
+        if i[4] != hash(a):
+            info += "Hash is not correct for "+ str(i)
+        else:
+            info += "Hash is correct for " + str(i)
+    return info
+
+# Hash correction
+@app.route("/hash_correction")
+def hash_correction():
+    info = ""
+    for i in transaction:
+        if i[4] != hash(i):
+            info += "Hash is not correct for "+ str(i)
+        else:
+            info += "Hash is correct for " + str(i)
+    return info
+
 if __name__ =='__main__':
     app.run()
