@@ -4,8 +4,10 @@ app = Flask(__name__)
 
 # Tuple initialization
 add1 = ("Antoine","Christian",1000,10)
-add1 = ("Antoine","Christian",1000,10,hash(add1))
 add2 = ("Antoine","Christian",200,200)
+
+# Add the hash in the tuple
+add1 = ("Antoine","Christian",1000,10,hash(add1))
 add2 = ("Antoine","Christian",200,200,hash(add2))
 
 # Dictionary initialization
@@ -15,6 +17,8 @@ transaction = [add1,add2]
 @app.route("/display_list", methods=['GET'])
 def getList():
     if request.method == 'GET':
+
+        # Sort the dictionary by date
         transaction.sort()
         return str(transaction)
 
@@ -22,26 +26,46 @@ def getList():
 @app.route("/display_list/<Person>", methods=['GET'])
 def getListPerson(Person):
     if request.method == 'GET':
+
+        # Sort the dictionary by date
         transaction.sort()
         result = ""
+
+        # Loop through the dictionary
         for i in transaction:
+
+            # Check if the person in the dictonary is egal to the person in the GET
             if i[0] == Person:
                 result+= str(i)
             if i[1] == str(Person):
                 result+= str(i)
+
+        # If the person is not in the dictionary
         if(result == ""):
             return "Person not found"
+
+        # If the person is in the dictionary return this transaction
         else:
             return result
 
 # Function to display  the solde of a person
 @app.route("/display_solde/<Person>")
 def getSolde(Person):
+
+    # Initialize the solde
     solde = 0
+
+    # Loop through the dictionary
     for i in transaction:
+
+        # Check if the person in the dictonary is egal to the person in the GET
         if i[0] == Person:
+
+            # Remove the solde of the person
             solde -= i[3]
         if i[1] == Person:
+
+            # Add the solde of the person
             solde += i[3]
     return str(solde)
 
@@ -49,6 +73,7 @@ def getSolde(Person):
 @app.route("/add_element/", methods=['POST','GET'])
 def addElement():
     if request.method == 'POST':
+
         # Get the data from the form
         person1=str(request.form.get("p1"))    
         person2=str(request.form.get("p2"))
@@ -82,13 +107,18 @@ def importeCSV():
 
       # Loop through the Rows
       for i,row in csvData.iterrows():
+
+        # Get the values from the row
         first_person = row['first_person']
         second_person = row['second_person']
         date = row['date']
         value =  row['value']
         hash = row['hash']
+
+        # Add the element in a tuple
         add = (first_person,second_person,date,value,hash)
        
+        # Add the tuple in the dictionary
         transaction.append(add)
     return "ok"
 
@@ -104,10 +134,10 @@ def hash_vefication():
         a= (i[0],i[1],i[2],i[3])
 
         # Check if the hash is correct
-        if i[4] != hash(a): 
-            info += "Hash is not correct for "+ str(i) + " "
+        if i[4] != hash(a):
+            info += "Hash is not correct for "+ str(i) + "\n"
         else:
-            info += "Hash is correct for " + str(i) + " "
+            info += "Hash is correct for " + str(i) + "\n"
     return info
 
 # Hash correction
@@ -123,10 +153,10 @@ def hash_correction():
         if i[4] != hash(a):
 
             # If not correct, correct it
-            info += "Hash is not correct for "+ str(i) + " the new hash is " + str(hash(a)) + " "
+            info += "Hash is not correct for "+ str(i) + " the new hash is " + str(hash(a)) + "\n"
             i = (i[0],i[1],i[2],i[3],hash(a))
         else:
-            info += "Hash is correct for " + str(i) + " "
+            info += "Hash is correct for " + str(i) + "\n"
     return info
 
 if __name__ =='__main__':
