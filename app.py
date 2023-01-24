@@ -31,9 +31,11 @@ def getList():
 def getListPerson(Person):
     if request.method == 'GET':
 
+        # Initialize the result
+        result = ""
+
         # Sort the dictionary by date
         transaction.sort()
-        result = ""
 
         # Loop through the dictionary
         for i in transaction:
@@ -48,7 +50,7 @@ def getListPerson(Person):
         if(result == ""):
             return "Person not found"
 
-        # If the person is in the dictionary return this transaction
+        # If the person is in the dictionary return the solde of transaction
         else:
             return result
 
@@ -136,7 +138,7 @@ def hash_vefication():
     # Loop through the dictionary
     for i in transaction:
 
-        #delete the last parameters of the tuple
+        # Delete the last parameters of the tuple
         a= (i[0],i[1],i[2],i[3])
 
         # Check if the hash is correct
@@ -152,7 +154,7 @@ def hash_correction():
     info = ""
     for i in transaction:
 
-        #delete the last parameters of the tuple
+        # Delete the last parameters of the tuple
         a= (i[0],i[1],i[2],i[3])
 
         # Check if the hash is correct
