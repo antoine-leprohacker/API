@@ -1,14 +1,18 @@
 from flask import Flask, request
+from datetime import datetime
 import pandas as pd
 app = Flask(__name__)
 
+# Get the current date in second since 1970
+time = datetime(2023,1,1).timestamp()
+
 # Tuple initialization
-add1 = ("Antoine","Christian",1000,10)
-add2 = ("Antoine","Christian",200,200)
+add1 = ("Antoine","Christian",time,10)
+add2 = ("Antoine","Christian",time,200)
 
 # Add the hash in the tuple
-add1 = ("Antoine","Christian",1000,10,hash(add1))
-add2 = ("Antoine","Christian",200,200,hash(add2))
+add1 = ("Antoine","Christian",time,10,hash(add1))
+add2 = ("Antoine","Christian",time,200,hash(add2))
 
 # Dictionary initialization
 transaction = [add1,add2]
@@ -77,8 +81,10 @@ def addElement():
         # Get the data from the form
         person1=str(request.form.get("p1"))    
         person2=str(request.form.get("p2"))
-        time=int(request.form.get("time"))
         solde=int(request.form.get("solde"))
+
+        # Get the current date in second since 2023
+        time = datetime(2023,1,1).timestamp()
 
         # Add the element in a tuple
         add = (person1,person2,time,solde)
