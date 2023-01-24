@@ -1,12 +1,16 @@
 from flask import Flask, request
 import pandas as pd
 app = Flask(__name__)
+
+# Tuple initialization
 add1 = ("Antoine","Christian",1000,10)
 add1 = ("Antoine","Christian",1000,10,hash(add1))
 add2 = ("Antoine","Christian",200,200)
 add2 = ("Antoine","Christian",200,200,hash(add2))
+
+# Dictionary initialization
 transaction = [add1,add2]
-#time is 
+
 # Function to return all of the dictionary
 @app.route("/display_list", methods=['GET'])
 def getList():
@@ -45,24 +49,34 @@ def getSolde(Person):
 @app.route("/add_element/", methods=['POST','GET'])
 def addElement():
     if request.method == 'POST':
+        # Get the data from the form
         person1=str(request.form.get("p1"))    
         person2=str(request.form.get("p2"))
         time=int(request.form.get("time"))
         solde=int(request.form.get("solde"))
-        add = (person1,person2,solde)
-        add = (person1,person2,solde,hash(add))
+
+        # Add the element in a tuple
+        add = (person1,person2,time,solde)
+        add = (person1,person2,solde,time,hash(add))
+
+        # Add the tuple in the dictionary
         transaction.append(add)
+
         return "You have successfully added a new element:" + str(add)
-    return "You have"
+    return "You have not added a new element"
 
 # Function to import a CSV file
 @app.route("/importeCSV", methods=['GET'])
 def importeCSV():
     if request.method == 'GET':
+
       # CVS Column Names
       filePath = str(request.form.get("filePath"))
       print(filePath)
+
+      # CSV Column Names
       col_names = ['first_person','second_person','date', 'value','hash']
+
       # Use Pandas to parse the CSV file
       csvData = pd.read_csv(filePath,names = col_names,engine='python',sep=';')
 
@@ -82,9 +96,14 @@ def importeCSV():
 @app.route("/hash_vefication")
 def hash_vefication():
     info = ""
+
+    # Loop through the dictionary
     for i in transaction:
+
         #delete the last parameters of the tuple
         a= (i[0],i[1],i[2],i[3])
+
+        # Check if the hash is correct
         if i[4] != hash(a): 
             info += "Hash is not correct for "+ str(i) + " "
         else:
@@ -96,8 +115,14 @@ def hash_vefication():
 def hash_correction():
     info = ""
     for i in transaction:
+
+        #delete the last parameters of the tuple
         a= (i[0],i[1],i[2],i[3])
+
+        # Check if the hash is correct
         if i[4] != hash(a):
+
+            # If not correct, correct it
             info += "Hash is not correct for "+ str(i) + " the new hash is " + str(hash(a)) + " "
             i = (i[0],i[1],i[2],i[3],hash(a))
         else:
