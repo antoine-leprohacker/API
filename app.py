@@ -3,11 +3,12 @@ from datetime import datetime
 import pandas as pd
 app = Flask(__name__)
 
-# Get the current date in second since 1970
-time = datetime(2023,1,1).timestamp()
+# Get the current date in second since 01-01-2023
+time = datetime(2023,1,1).timestamp() 
 
 # Tuple initialization
 add1 = ("Antoine","Christian",time,10)
+#
 add2 = ("Antoine","Christian",time,200)
 
 # Add the hash in the tuple
@@ -108,6 +109,9 @@ def importeCSV():
       print(filePath)
 
       # CSV Column Names
+    # This code is used to generate an array of column names for a dataframe
+    # The column names are first_person, second_person, date, value, and hash
+
       col_names = ['first_person','second_person','date', 'value','hash']
 
       # Use Pandas to parse the CSV file
@@ -154,8 +158,8 @@ def hash_correction():
     info = ""
     for i in transaction:
 
-        # Delete the last parameters of the tuple
-        a= (i[0],i[1],i[2],i[3])
+        # Create a new tuple with the first three parameters of the tuple
+        a= (i[0],i[1],i[2])
 
         # Check if the hash is correct
         if i[4] != hash(a):
@@ -164,6 +168,8 @@ def hash_correction():
             info += "Hash is not correct for "+ str(i) + " the new hash is " + str(hash(a)) + "\n"
             i = (i[0],i[1],i[2],i[3],hash(a))
         else:
+            
+            # If correct, do nothing
             info += "Hash is correct for " + str(i) + "\n"
     return info
 
