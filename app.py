@@ -8,7 +8,6 @@ time = datetime(2023,1,1).timestamp()
 
 # Tuple initialization
 add1 = ("Antoine","Christian",time,10)
-#
 add2 = ("Antoine","Christian",time,200)
 
 # Add the hash in the tuple
@@ -18,6 +17,7 @@ add2 = ("Antoine","Christian",time,200,hash(add2))
 # Dictionary initialization
 transaction = [add1,add2]
 
+
 # Function to return all of the dictionary
 @app.route("/display_list", methods=['GET'])
 def getList():
@@ -26,6 +26,7 @@ def getList():
         # Sort the dictionary by date
         transaction.sort()
         return str(transaction)
+
 
 # Function to return all of the dictionary of a person
 @app.route("/display_list/<Person>", methods=['GET'])
@@ -55,6 +56,7 @@ def getListPerson(Person):
         else:
             return result
 
+
 # Function to display  the solde of a person
 @app.route("/display_solde/<Person>")
 def getSolde(Person):
@@ -75,6 +77,7 @@ def getSolde(Person):
             # Add the solde of the person
             solde += i[3]
     return str(solde)
+
 
 # Function to add an element in the dictionary
 @app.route("/add_element/", methods=['POST','GET'])
@@ -99,6 +102,7 @@ def addElement():
         return "You have successfully added a new element:" + str(add)
     return "You have not added a new element"
 
+
 # Function to import a CSV file
 @app.route("/importeCSV", methods=['GET'])
 def importeCSV():
@@ -108,7 +112,7 @@ def importeCSV():
       filePath = str(request.form.get("filePath"))
       print(filePath)
 
-      # CSV Column Names
+    # CSV Column Names
     # This code is used to generate an array of column names for a dataframe
     # The column names are first_person, second_person, date, value, and hash
 
@@ -134,8 +138,9 @@ def importeCSV():
         transaction.append(add)
     return "ok"
 
+
 # Hash verification
-@app.route("/hash_vefication")
+@app.route("/hash_verification")
 def hash_vefication():
     info = ""
 
@@ -151,6 +156,7 @@ def hash_vefication():
         else:
             info += "Hash is correct for " + str(i) + "\n"
     return info
+
 
 # Hash correction
 @app.route("/hash_correction")
