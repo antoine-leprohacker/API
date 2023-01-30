@@ -29,5 +29,5 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4.4.0
       - name: runPy 
-        run: python main.py
+        run: python app.py
        
