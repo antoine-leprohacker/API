@@ -84,13 +84,11 @@ def hash_vefication():
     info = ""
     for i in transaction:
         #delete the last parameters of the tuple
-        a = ()
-        for j in range(0,len(i)-2):
-            a += i[j]
-        if i[4] != hash(a):
-            info += "Hash is not correct for "+ str(i)
+        a= (i[0],i[1],i[2],i[3])
+        if i[4] != hash(a): 
+            info += "Hash is not correct for "+ str(i) + " "
         else:
-            info += "Hash is correct for " + str(i)
+            info += "Hash is correct for " + str(i) + " "
     return info
 
 # Hash correction
@@ -98,10 +96,12 @@ def hash_vefication():
 def hash_correction():
     info = ""
     for i in transaction:
-        if i[4] != hash(i):
-            info += "Hash is not correct for "+ str(i)
+        a= (i[0],i[1],i[2],i[3])
+        if i[4] != hash(a):
+            info += "Hash is not correct for "+ str(i) + " the new hash is " + str(hash(a)) + " "
+            i = (i[0],i[1],i[2],i[3],hash(a))
         else:
-            info += "Hash is correct for " + str(i)
+            info += "Hash is correct for " + str(i) + " "
     return info
 
 if __name__ =='__main__':
