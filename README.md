@@ -85,7 +85,7 @@ def importeCSV():
 ```
 
 ```bash
-curl -X POST -d "key=value" http://localhost:5000/ 
+curl -d  "filePath=tab.csv" -X  GET http://localhost:5000/importeCSV
 
 ```
 
