@@ -23,11 +23,14 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+#       - uses: actions/checkout@v3
 
       # Runs a set of commands using the runners shell
-      - name: Setup Python
-        uses: actions/setup-python@v4.4.0
-      - name: runPy 
-        run: python app.py
+#       - name: Setup Python
+#         uses: actions/setup-python@v4.4.0
+#       - name: runPy 
+#         run: python app.py
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag flask-app
        
