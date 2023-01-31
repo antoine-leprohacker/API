@@ -1,14 +1,12 @@
 # API
 
-By Christian Hasbani and Antoine Chenevier
+By **Christian Hasbani** and **Antoine Chenevier**
 
 Student at ESIREM in 4A ILC
 
  **Objectif :** Create a Flask API for CRUD management of a transaction system
 
  [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)  
-
-## Exercise 1
 
 ### Workflows
   
