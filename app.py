@@ -58,7 +58,7 @@ def getListPerson(Person):
 
 
 # Function to display  the solde of a person
-@app.route("/display_solde/<Person>")
+@app.route("/display_solde/<Person>", methods=['GET'])
 def getSolde(Person):
 
     # Initialize the solde
@@ -140,7 +140,7 @@ def importeCSV():
 
 
 # Hash verification
-@app.route("/hash_verification")
+@app.route("/hash_verification", methods=['GET'])
 def hash_vefication():
     info = ""
 
@@ -159,7 +159,7 @@ def hash_vefication():
 
 
 # Hash correction
-@app.route("/hash_correction")
+@app.route("/hash_correction", methods=['GET'])
 def hash_correction():
     info = ""
     for i in transaction:
