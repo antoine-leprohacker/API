@@ -10,11 +10,11 @@ Student at ESIREM in 4A ILC
 
 ### Workflows
  
- [Moon](./workflows/moon.yml) : GitHub action Moon
+ [Moon](./.github/workflows/moon.yml) : GitHub action Moon
 
- [Pull](./workflows/on_pull.yml) : GitHub action pull
+ [Pull](./.github/workflows/on_pull.yml) : GitHub action pull
   
- [Push](./workflows/on_push.yml) : GitHub action push
+ [Push](./.github/workflows/on_push.yml) : GitHub action push
   
 ## Documentation
 
