@@ -1,4 +1,5 @@
 # API
+
 By Christian Hasbani and Antoine Chenevier
 
 Student at ESIREM in 4A ILC
@@ -6,26 +7,114 @@ Student at ESIREM in 4A ILC
  **Objectif :** Create a Flask API for CRUD management of a transaction system
 
  [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)  
-## Exercise 1
 
+## Exercise 1
 
 ### Workflows
   
 ## Documentation
+
 We have a list of transactions, each transaction is a tuple (P1, P2, t,s,hash), where s is equal to the amount of money transferred from person P1 to person P2 at time t and hash is the key of the tuple.
 
  We have the current date in second since 01-01-2023.
 
+## curl
+
+Voici des exemples de commande `curl` pour accéder aux différentes route dans [app.py](./app.py)
+
+### route `/dictionary`
+
+```python
+@app.route("/display_list", methods=['GET'])
+def getList():
+```
+
+```bash
+curl -X GET http://localhost:5000/display_list
+```
+
 Function to return all of the dictionary
+
+### route `/display_list/<Person>`
+
+```python
+@app.route("/display_list/<Person>", methods=['GET'])
+def getListPerson(Person):
+  ...
+```
+
+```bash
+curl -X POST -d "Person=person" http://localhost:5000/display_list/<Person>
+```
 
 Function to return all of the dictionary of a person
 
+### route `/display_solde/<Person>`
+
+```python
+@app.route("/display_solde/<Person>", methods=['GET'])
+def getSolde(Person):
+  ...
+```
+
+```bash
+curl -X GET -d "Person=person" http://localhost:5000/display_solde/<Person>
+```
+
 Function to display  the solde of a person
+
+### route `/add_element/`
+
+```python
+@app.route("/add_element/", methods=['POST','GET'])
+def addElement():
+```
+
+```bash
+curl -X GET http://localhost:5000/add_element/
+```
 
 Function to add an element in the dictionary
 
+### route `/importeCSV`
+
+```python
+@app.route("/importeCSV", methods=['GET'])
+def importeCSV():
+  ...
+```
+
+```bash
+curl -X POST -d "key=value" http://localhost:5000/ 
+
+```
+
 Function to import a CSV file
+
+### route `/hash_verification`
+
+```python
+@app.route("/hash_verification", methods=['GET'])
+def hash_vefication():
+  ...
+```
+
+```bash
+curl -X GET http://localhost:5000/hash_verification
+```
 
 Hash verification
 
-Hash correction.
+### route `/hash_correction`
+
+```python
+@app.route("/hash_correctionn", methods=['GET'])
+def hash_vefication():
+  ...
+```
+
+```bash
+curl -X GET http://localhost:5000/hash_correction
+```
+
+Hash correction
