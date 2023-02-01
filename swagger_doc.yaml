@@ -39,7 +39,7 @@ paths:
     get:
       tags:
         - Transations
-      summary: Get the transation for a person
+      summary: Get a list of transations for a person
       description: return a list of transations for that person
       operationId: getListByPerson
       parameters:
