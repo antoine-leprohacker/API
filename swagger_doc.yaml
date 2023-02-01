@@ -1,0 +1,214 @@
+openapi: 3.0.3
+info:
+  title: Project CI/CD
+  description: Creating an Flask API for CRUD management of transation systems
+  termsOfService: http://swagger.io/terms/
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://petstore3.swagger.io/api/v3
+tags:
+  - name: Transations API
+    description: We have a list of transactions, each transaction is a tuple (P1, P2, t,s,hash), where s is equal to the amount of money transferred from person P1 to person P2 at time t and hash is the key of the tuple.
+  - name: Transations
+    description: Transation operations
+paths:
+  /display_list:
+    get:
+      tags:
+        - Transations
+      summary: Get a list of all Transations
+      description: Returns a list of all the transations in our flask application
+      operationId: getList
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transations_list'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Transations_list'
+  /display_list/<Person>:
+    get:
+      tags:
+        - Transations
+      summary: Get the transation for a person
+      description: return a list of transations for that person
+      operationId: getListByPerson
+      parameters:
+        - in: query
+          name: Person
+          description: Person's name to get his/her transations
+          required: true
+          schema:
+            type: string
+            
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transations_list'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Transations_list'
+
+  /display_solde/<Person>:
+    get:
+      tags:
+        - Transations
+      summary: Get the solde for a person
+      description: returns a list of transations for a person
+      operationId: getSoldeByPerson
+      parameters:
+        - in: query
+          name: Person
+          description: Person's name to get his/her solde
+          required: true
+          schema:
+            type: string
+            
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Solde'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Solde'
+                
+  /add_element/:
+    get:
+      tags:
+        - Transations
+      summary: Show newly added transation
+      description: Returns the newly added transation
+      operationId: getAddedElement
+      
+            
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/add_element'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/add_element'
+    post:
+      tags:
+        - Transations
+      summary: Add a new transation to our flask app
+      description: Adds a transation to the transations list
+      operationId: postAddElement
+      parameters:
+        - in: query
+          name: Person1
+          description: Person to transfer money form
+          required: true
+          schema:
+            type: string
+        
+        - in: query
+          name: Person2
+          description: Person to transfer money to
+          required: true
+          schema:
+            type: string
+            
+        - in: query
+          name: solde
+          description: Amount of money to transfer
+          required: true
+          schema:
+            type: string 
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/add_element'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/add_element'  
+  /importeCSV:
+    get:
+      tags:
+        - Transations
+      summary: Retrieve the transations in the excel file
+      description: Returns the transations in the csv file
+      operationId: importCSV 
+      
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transations_list'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Transations_list'
+components:
+  schemas:
+    Transations_list:
+          type: array
+          xml:
+            name: transations
+          items:
+            $ref: '#/components/schemas/Transation'
+  
+    Transation:
+      type: object
+      properties:
+        person1:
+          type: string
+          example: 'Christian'
+        person2:
+          type: string
+          example: 'Antoine'
+        time:
+          type: integer
+          description: time in milliseconds
+          format: int32
+          example: 89415648946587465
+        amount:
+          type: integer
+          format: int32
+          example: 50
+        hash:
+          type: string
+          example: 'ifeji9jfeio32748923fji3ur892ifdpokwqop'
+      xml:
+        name: Transation
+    Solde:
+      type: integer
+      format: double
+      example: 4239.63
+      xml:
+        name: Solde
+        
+    add_element:
+      type: object
+      properties:
+        message:
+          type: string
+          example: 'You have successfully added a new transation'
+        
+        transation:
+          $ref: '#/components/schemas/Transation'
+      xml:
+        name: add_element
+      
