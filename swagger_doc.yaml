@@ -102,10 +102,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/add_element'
+                $ref: '#/components/schemas/add_element_response'
             application/xml:
               schema:
-                $ref: '#/components/schemas/add_element'
+                $ref: '#/components/schemas/add_element_response'
     post:
       tags:
         - Transations
@@ -133,16 +133,29 @@ paths:
           required: true
           schema:
             type: string 
+      requestBody:
+        description: Create a new pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/add_element_request'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/add_element_request'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/add_element_request'
+        required: true
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/add_element'
+                $ref: '#/components/schemas/add_element_response'
             application/xml:
               schema:
-                $ref: '#/components/schemas/add_element'  
+                $ref: '#/components/schemas/add_element_response'  
   /importeCSV:
     get:
       tags:
@@ -161,6 +174,58 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/Transations_list'
+  
+  /hash_verification:
+    get:
+      tags:
+        - Transations
+      summary: verify the hash
+      description: verification
+      operationId: getHash
+      
+      responses:
+        '200':
+          description: Hash verified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hash_verified'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/hash_verified'
+        '400':
+          description: Hash not verified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hash_not_verified'
+  /hash_correction:
+    get:
+      tags:
+        - Transations
+      summary: Correct the hash
+      description: some desc
+      operationId: correctHash
+      
+      responses:
+        '200':
+          description: Hash corrected
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hash_corrected'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/hash_corrected'
+        '400':
+          description: Hash not corrected
+          content:
+            appllication/json:
+              schema:
+                $ref: '#/components/schemas/hash_not_corrected'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/hash_not_corrected'
 components:
   schemas:
     Transations_list:
@@ -200,7 +265,7 @@ components:
       xml:
         name: Solde
         
-    add_element:
+    add_element_response:
       type: object
       properties:
         message:
@@ -210,5 +275,31 @@ components:
         transation:
           $ref: '#/components/schemas/Transation'
       xml:
-        name: add_element
-      
+        name: add_element_response
+    add_element_request:
+      type: object
+      properties:
+        person1: 
+          type: string
+          example: 'Christian'
+        person 2:
+          type: string
+          example: 'Antoine'
+        solde:
+          type: integer
+          format: double
+          example: 234.756
+      xml:
+        name: add_element_request
+    hash_verified:
+      type: string
+      example: 'This hash is correct'
+    hash_not_verified:
+      type: string
+      example: 'This hash is not correct'
+    hash_corrected:
+      type: string
+      example: 'The hash of this tuple was altered'
+    hash_not_corrected:
+      type: string
+      example: 'The hash of this tuple was not altered'
