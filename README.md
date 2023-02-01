@@ -121,7 +121,7 @@ curl -X GET http://localhost:5000/hash_correction
 
 Hash correction
 
-## Building the docker iamge
+## Building the docker image
 We built the docker image using the following command in the terminal
 ```bash
 docker build -t flask-app . 
