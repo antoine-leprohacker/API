@@ -22,7 +22,7 @@ We have a list of transactions, each transaction is a tuple (P1, P2, t,s,hash), 
 
 ## curl
 
-Voici des exemples de commande `curl` pour accéder aux différentes route dans [app.py](./app.py)
+Here are examples of `curl` commands to access the different routes in [app.py](./app.py)
 
 ### route `/display_list`
 
@@ -120,6 +120,27 @@ curl -X GET http://localhost:5000/hash_correction
 ```
 
 Hash correction
+
+## Building the docker iamge
+We built the docker image using the following command in the terminal
+```bash
+docker build -t flask-app . 
+```
+Using the ```docker images``` command
+
+![image](https://user-images.githubusercontent.com/117630923/216095191-fbe11e6c-5246-442c-90dd-5fe508c28e82.png)
+
+
+## Running the docker image in a container
+```bash
+sudo docker run -it -p 5000:5000 -d flask-app
+```
+This will lauch our flask application on localhost port ```5000```
+![image](https://user-images.githubusercontent.com/117630923/216095866-b40bdcd5-f990-47d4-befc-acd778ee1cdd.png)
+We use ```docker ps``` to display running containers
+
+We can see at the end we have the follow result
+![image](https://user-images.githubusercontent.com/117630923/216096355-1586072b-1534-4aba-bf6e-84cf299e14df.png)
 
 
 ## Update
