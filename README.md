@@ -26,7 +26,7 @@ We have a list of transactions, each transaction is a tuple (P1, P2, t,s,hash), 
 
 Voici des exemples de commande `curl` pour accéder aux différentes route dans [app.py](./app.py)
 
-### route `/dictionary`
+### route `/display_list`
 
 ```python
 @app.route("/display_list", methods=['GET'])
