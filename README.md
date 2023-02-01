@@ -120,3 +120,7 @@ curl -X GET http://localhost:5000/hash_correction
 ```
 
 Hash correction
+
+
+## Update
+We have already implemented all the features in the app.py file  before releasing  
