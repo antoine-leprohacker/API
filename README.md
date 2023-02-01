@@ -75,7 +75,7 @@ def addElement():
 ```
 
 ```bash
-curl -X GET http://localhost:5000/add_element/
+curl -X GET http://loccurl -X POST http://localhost:5000/add_element/ -d "p1=christian&p2=antoine&solde=10"
 ```
 
 Function to add an element in the dictionary
