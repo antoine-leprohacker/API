@@ -32,7 +32,7 @@ jobs:
         with:
           # Emplacement du Dockerfile
           file: Dockerfile
-          tags: gcr.io/esirem/4a_ilc/hasbani_chenevier/api/:${{ github.ref_name }}
+          tags: gcr.io/esirem/4a_ilc/hasbani_chenevier/api:${{ github.ref_name }}
           # Emplacement des fichiers 
           context: ""
           push: true
