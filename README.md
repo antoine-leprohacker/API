@@ -1,12 +1,13 @@
 # API
 
+[![Generic badge](https://img.shields.io/badge/-ProjetTerminé-<COLOR>.svg)](https://shields.io/)
 By **Christian Hasbani** and **Antoine Chenevier**
 
 Student at ESIREM in 4A ILC
 
  **Objectif :** Create a Flask API for CRUD management of a transaction system
 
- Antoine
+ 
 
  [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)  
 
